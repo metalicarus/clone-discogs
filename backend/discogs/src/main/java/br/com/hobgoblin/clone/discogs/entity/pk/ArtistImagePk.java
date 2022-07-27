@@ -12,12 +12,12 @@ import lombok.ToString;
 @Setter
 @ToString
 @Embeddable
-public class ArtistSitePk implements Serializable {
-	
+public class ArtistImagePk implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Long artistId;
-	private String site;
+	private String path;
 }
