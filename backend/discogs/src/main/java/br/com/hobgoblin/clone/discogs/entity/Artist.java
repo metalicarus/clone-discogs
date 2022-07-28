@@ -1,15 +1,23 @@
 package br.com.hobgoblin.clone.discogs.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Artist {
 	
 	@Id
@@ -22,7 +30,12 @@ public class Artist {
 	@Column(length = 150)
 	private String realName;
 	
-	@Column(length = 500)
+	@Column(length = 3000)
 	private String profile;
+	
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Set<ArtistImage> images;
 	
 }
