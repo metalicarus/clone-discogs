@@ -1,15 +1,27 @@
 package br.com.hobgoblin.clone.discogs.entity;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import br.com.hobgoblin.clone.discogs.entity.pk.ArtistImagePk;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import br.com.hobgoblin.clone.discogs.entity.base.BaseEntity;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
-public class ArtistImage {
-
-	@EmbeddedId
-	private ArtistImagePk id;
+@Table(name = "artists_images")
+@Getter
+@Setter
+public class ArtistImage extends BaseEntity {
+	
+	@JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "artist_id", nullable = false)
+	private Artist artist;
+	
+	private String imageUrl;
 }

@@ -12,25 +12,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.hobgoblin.clone.discogs.entity.Artist;
-import br.com.hobgoblin.clone.discogs.repository.contract.jpa.ArtistRepositoryInterface;
+import br.com.hobgoblin.clone.discogs.request.ArtistRequest;
+import br.com.hobgoblin.clone.discogs.request.input.ArtistImageInputRequest;
+import br.com.hobgoblin.clone.discogs.service.contract.ArtistServiceInterface;
 
 @RestController
 @RequestMapping(value= "/api/v1/artists")
 public class ArtistController {
 
 	@Autowired
-	private ArtistRepositoryInterface repository;
+	private ArtistServiceInterface service;
 	
 	@PutMapping
 	@PostMapping
-	public ResponseEntity<Artist> save(@RequestBody Artist artist) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(artist));
+	public ResponseEntity<ArtistRequest> save(@RequestBody ArtistRequest artist) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.save(artist));
+	}
+		
+	@GetMapping
+	public ResponseEntity<List<ArtistRequest>> findAll() {
+		return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
 	}
 	
-	@GetMapping
-	public ResponseEntity<List<Artist>> findAll() {
-		return ResponseEntity.status(HttpStatus.OK).body(repository.findAll());
+	@PostMapping("add-image")
+	public void addImage(@RequestBody ArtistImageInputRequest image) {
+		service.addImage(image);
 	}
 	
 }
