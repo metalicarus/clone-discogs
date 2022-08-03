@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import br.com.hobgoblin.clone.discogs.entity.Artist;
 import br.com.hobgoblin.clone.discogs.request.ArtistImageRequest;
+import br.com.hobgoblin.clone.discogs.request.ArtistNameVariationRequest;
 import br.com.hobgoblin.clone.discogs.request.ArtistRequest;
 import br.com.hobgoblin.clone.discogs.request.output.ArtistOutputRequest;
 
@@ -20,6 +21,11 @@ public class ArtistMapper {
 			ArtistImageRequest image = new ArtistImageRequest();
 			image.setImageUrl(x.getImageUrl());
 			return image;
+		}).toList());
+		output.setVariations(entity.getVariations().stream().map(x -> {
+			ArtistNameVariationRequest variation = new ArtistNameVariationRequest();
+			variation.setName(x.getName());
+			return variation;
 		}).toList());
 		return output;
 	}

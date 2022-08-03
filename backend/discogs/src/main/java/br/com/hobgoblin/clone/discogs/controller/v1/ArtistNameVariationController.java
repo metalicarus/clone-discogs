@@ -14,32 +14,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.hobgoblin.clone.discogs.request.ArtistImageRequest;
-import br.com.hobgoblin.clone.discogs.request.input.ArtistImageInputRequest;
-import br.com.hobgoblin.clone.discogs.service.contract.ArtistImageServiceInterface;
+import br.com.hobgoblin.clone.discogs.request.ArtistNameVariationRequest;
+import br.com.hobgoblin.clone.discogs.request.input.ArtistNameVariationInputRequest;
+import br.com.hobgoblin.clone.discogs.service.contract.ArtistNameVariationServiceInterface;
 
 @RestController
-@RequestMapping(value= "/api/v1/artists/images")
-public class ArtistImageController {
+@RequestMapping(value= "/api/v1/artists/variations")
+public class ArtistNameVariationController {
 
 	@Autowired
-	private ArtistImageServiceInterface service;
+	private ArtistNameVariationServiceInterface service;
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void addImage(@RequestBody ArtistImageInputRequest image) {
-		service.addImage(image);
+	public void addNameVariation(@RequestBody ArtistNameVariationInputRequest variation) {
+		service.addNameVariation(variation);
 	}
 	
-	@DeleteMapping("{imageId}")
+	@DeleteMapping("{variationId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void removeImage(@PathVariable Long imageId) {
-		service.removeImage(imageId);
+	public void removeNameVariation(@PathVariable Long variationId) {
+		service.removeNameVariation(variationId);
 	}
 	
 	@GetMapping("{artistId}")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<List<ArtistImageRequest>> findAll(@PathVariable Long artistId) {
+	public ResponseEntity<List<ArtistNameVariationRequest>> findAll(@PathVariable Long artistId) {
 		return ResponseEntity.ok(service.findByArtistId(artistId));
 	}
 }

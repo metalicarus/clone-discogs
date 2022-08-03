@@ -2,6 +2,8 @@ package br.com.hobgoblin.clone.discogs.service.implementation;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +32,13 @@ public class ArtistService implements ArtistServiceInterface<ArtistRequest, Long
 	public ArtistRequest find(Long identifier) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void remove(Long identifier) {
+		repository.findById(identifier).orElseThrow(() -> {
+			throw new EntityNotFoundException();
+		});
+		repository.deleteById(identifier);
 	} 
 }

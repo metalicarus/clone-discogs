@@ -1,13 +1,17 @@
 package br.com.hobgoblin.clone.discogs.service.implementation;
 
+import java.util.List;
+
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.hobgoblin.clone.discogs.entity.ArtistImage;
+import br.com.hobgoblin.clone.discogs.mapper.ArtistImageMapper;
 import br.com.hobgoblin.clone.discogs.repository.contract.jpa.ArtistImageRepositoryInterface;
 import br.com.hobgoblin.clone.discogs.repository.contract.jpa.ArtistRepositoryInterface;
+import br.com.hobgoblin.clone.discogs.request.ArtistImageRequest;
 import br.com.hobgoblin.clone.discogs.request.input.ArtistImageInputRequest;
 import br.com.hobgoblin.clone.discogs.service.contract.ArtistImageServiceInterface;
 
@@ -36,5 +40,12 @@ public class ArtistImageService implements ArtistImageServiceInterface {
 			throw new EntityNotFoundException();
 		});
 		repository.deleteById(imageId);
+	}
+
+	@Override
+	public List<ArtistImageRequest> findByArtistId(Long artistId) {
+		return ArtistImageMapper.listEntityToListDto( repository.findByArtist(artistRepository.findById(artistId).orElseThrow(() -> {
+			throw new EntityNotFoundException();
+		})));
 	}
 }

@@ -36,5 +36,11 @@ public class ArtistOutputService implements ArtistServiceInterface<ArtistRequest
 	public List<Output> findAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void remove(Long identifier) {
+		// TODO Auto-generated method stub
+		
 	}	
 }

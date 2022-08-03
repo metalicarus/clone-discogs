@@ -17,8 +17,9 @@ public class ArtistRequest {
 	
 	@Getter
 	@Setter
-	public static class Output extends ArtistRequest{		
+	public static class Output extends ArtistRequest{
 		private List<ArtistImageRequest> images = new ArrayList<>();
+		private List<ArtistNameVariationRequest> variations = new ArrayList<>();
 		public static Output factory() {
 			return new Output();
 		}
