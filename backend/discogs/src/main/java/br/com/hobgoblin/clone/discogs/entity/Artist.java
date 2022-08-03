@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,7 +28,7 @@ public class Artist extends BaseEntity {
 	@Column(length = 3000)
 	private String profile;
 
-    @OneToMany(mappedBy = "artist", orphanRemoval = true)
+    @OneToMany(mappedBy = "artist", orphanRemoval = true, fetch = FetchType.LAZY)
 	private Set<ArtistImage> images = new HashSet<>();
     
     @OneToMany(mappedBy = "artist", orphanRemoval = true)
