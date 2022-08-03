@@ -7,6 +7,7 @@ import br.com.hobgoblin.clone.discogs.entity.Artist;
 import br.com.hobgoblin.clone.discogs.request.ArtistImageRequest;
 import br.com.hobgoblin.clone.discogs.request.ArtistNameVariationRequest;
 import br.com.hobgoblin.clone.discogs.request.ArtistRequest;
+import br.com.hobgoblin.clone.discogs.request.ArtistSiteRequest;
 import br.com.hobgoblin.clone.discogs.request.output.ArtistOutputRequest;
 
 public class ArtistMapper {
@@ -26,6 +27,11 @@ public class ArtistMapper {
 			ArtistNameVariationRequest variation = new ArtistNameVariationRequest();
 			variation.setName(x.getName());
 			return variation;
+		}).toList());
+		output.setSites(entity.getSites().stream().map(x -> {
+			ArtistSiteRequest site = new ArtistSiteRequest();
+			site.setSite(x.getSite());
+			return site;
 		}).toList());
 		return output;
 	}

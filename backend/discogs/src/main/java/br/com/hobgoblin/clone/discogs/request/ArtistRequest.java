@@ -20,6 +20,7 @@ public class ArtistRequest {
 	public static class Output extends ArtistRequest{
 		private List<ArtistImageRequest> images = new ArrayList<>();
 		private List<ArtistNameVariationRequest> variations = new ArrayList<>();
+		private List<ArtistSiteRequest> sites = new ArrayList<>();
 		public static Output factory() {
 			return new Output();
 		}
